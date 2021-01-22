@@ -1,8 +1,15 @@
 const Httperror = require('../models/error');
 const { validationResult } = require('express-validator');
 const User= require("../models/userschema");
-const getusers = (req,res,next)=>{
-    res.json({users:DUMMY});
+const getusers = async(req,res,next)=>{
+    let users;
+    try{
+        users = await User.find({},'-password');
+    }catch(err)
+    {
+        return next(new Httperror('Issues',500));
+    }
+    res.json({users:users});
 };
 const signup =async(req,res,next)=>{
     const errors = validationResult(req) ;

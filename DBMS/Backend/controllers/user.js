@@ -30,14 +30,18 @@ const signup =async(req,res,next)=>{
         }
     res.status(201).json({user:createruser});
 };
-const login = (req,res,next)=>{
+const login = async (req,res,next)=>{
     const{email,password} = req.body;
-    const identuser = DUMMY.find(u => u.email===email);
-    if(!identuser || identuser.password !== password){
-        throw new Httperror('no user',401);
+    let existinguser;
+    try{
+     existinguser =await User.findOne({email:email})
+    }catch(err){
+        return next(new Httperror('Problem',404));
     }
-    res.json({message:'ypu in'});
-
+    if(!existinguser || existinguser.password !== password){
+        return next(new("Invalid",401));
+    }
+    res.json({message: 'Logged in!'});
 
 };
 exports.getusers = getusers;

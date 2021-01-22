@@ -4,19 +4,6 @@ const getcoordinates = require('../util/location');
 const Place = require('../models/placesschema'); 
  const mongoose = require('mongoose');
 
-
-let DUMMY = [{
-    id:'p1',
-    title:'EMpire',
-    description: 'away',
-    location:{
-        lat:40.43535,
-        lng:45.25
-    },
-    address:'nearby',
-    creator:'u1'
-    
-}];
 const getplacebyid = async (req,res,next) => {
     const placeID =req.params.pid;
     let place;

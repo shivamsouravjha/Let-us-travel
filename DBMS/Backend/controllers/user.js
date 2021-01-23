@@ -17,25 +17,20 @@ const signup =async(req,res,next)=>{
         return next( new Httperror('invalid data witch',422));
     }
     const {name,email,password,places}=req.body;
-    let existinguser
-    try{
-     existinguser =await User.findOne({email:email})
-    }catch(err){
-        return next(new Httperror('Problem',404));
-    }
-    if(existinguser){
-        return next(new('already','422'));
-    }
-    const createruser = new User({
+   
+    let createduser = new User({
         name,email,password,image:'https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Empire_State_Building_%28aerial_view%29.jpg/400px-Empire_State_Building_%28aerial_view%29.jpg',
       places
     });
-    try{
-        await createruser.save();
-    }catch(err){
-            return next( new Httperror(' Couldnt find users',404));
-        }
-    res.status(201).json({user:createruser});
+    try {
+        await createduser.save();
+    }catch (err){
+        const error = new Httperror(
+            'Signing up failed, please try again.',
+            500
+          );
+          return next(error);        }
+    res.status(201).json({user:createduser});
 };
 const login = async (req,res,next)=>{
     const{email,password} = req.body;
@@ -46,7 +41,7 @@ const login = async (req,res,next)=>{
         return next(new Httperror('Problem',404));
     }
     if(!existinguser || existinguser.password !== password){
-        return next(new("Invalid",401));
+        return next(new Httperror("Invalid",401));
     }
     res.json({message: 'Logged in!'});
 

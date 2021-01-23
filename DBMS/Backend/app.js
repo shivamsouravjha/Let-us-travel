@@ -23,7 +23,7 @@
   mongoose
   .connect('mongodb://shivam:123456shivam@cluster0-shard-00-00.dm1xw.mongodb.net:27017,cluster0-shard-00-01.dm1xw.mongodb.net:27017,cluster0-shard-00-02.dm1xw.mongodb.net:27017/Place?ssl=true&replicaSet=atlas-x6eag6-shard-0&authSource=admin&retryWrites=true&w=majority')
   .then(() => {
-    app.listen(5000);
+    app.listen(4001);
   })
   .catch(err => {
     console.log(err);

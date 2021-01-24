@@ -18,7 +18,7 @@ const getplacebyid = async (req,res,next) => {
         //const error= new Error('Not Here');
         //error.code =404;
         //next(error);
-        throw  new Httperror('Couldnt find',404);
+        return next(new Httperror('Couldnt find',404));
     }
     res.json({place});
 };
@@ -35,7 +35,7 @@ const getplacebyuser = async (req,res,next) => {
         //const error= new Error('Not Here');
         //error.code =404;
         //next(error);
-        throw new Httperror(' Couldnt find users',404);
+        return next( new Httperror(' Couldnt find users',404));
     }
     res.json({place:place});
 }; 
@@ -61,7 +61,7 @@ const createplace = async (req,res,next)=>{
         address,
         location:coordi,
         image:'https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Empire_State_Building_%28aerial_view%29.jpg/400px-Empire_State_Building_%28aerial_view%29.jpg',
-        creator:[]
+        creator
     });
     let user;
     try{
@@ -73,6 +73,8 @@ const createplace = async (req,res,next)=>{
     {
         return next(new Httperror('No such user',500));
     }
+    console.log(user);
+
     try{
         const sess = await mongoose.startSession();
         sess.startTransaction();
@@ -113,16 +115,24 @@ const deleteplace = async(req,res,next)=>{
     const placeID = req.params.pid;
     let place;
     try{
-        place=await Place.findById(placeID);
+        place = await Place.findById(placeID).populate('creator');
 
     }catch(err){
         return next(new Httperror('Problem',404));
     }
+    if(!place)
+    {
+        return next(new Httperror('No such user',500));
+    }
     try{
-        await place.remove();
-
+        const sess = await mongoose.startSession();
+        sess.startTransaction();
+        await place.remove({session:sess});
+        place.creator.places.pull(place);
+         place.creator.save({session:sess});
+        await sess.commitTransaction();
     }catch(err){
-        return next(new Httperror('Problem',404));
+        return next(new Httperror('Problemn not deleted',404));
     }
     res.status(200).json({message:'Deleted'});
 };

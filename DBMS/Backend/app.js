@@ -21,7 +21,7 @@
     res.json({message: error.message || 'Unknown'});
   });
   mongoose
-  .connect('mongodb+srv://shivam:123456shivam@cluster0.dm1xw.mongodb.net/Place?retryWrites=true&w=majority')
+  .connect('')
   .then(() => {
     app.listen(4001);
   })

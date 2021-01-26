@@ -7,20 +7,20 @@ const mongoose = require('mongoose');
 
 const getplacebyid = async (req,res,next) => {
     const placeID =req.params.pid;
-    let place;
+    let userwithplace;
     try{
-        place=await Place.findById(placeID);
+        userwithplace=await User.findById(placeID).populate('places');
 
     }catch(err){
         return next( new Httperror('doesnot work',422));
     }
-    if(!place){
+    if(!userwithplace){
         //const error= new Error('Not Here');
         //error.code =404;
         //next(error);
         return next(new Httperror('Couldnt find',404));
     }
-    res.json({place});
+    res.json({userwithplace});
 };
 const getplacebyuser = async (req,res,next) => {
     const userID =req.params.uid;
@@ -129,7 +129,7 @@ const deleteplace = async(req,res,next)=>{
         sess.startTransaction();
         await place.remove({session:sess});
         place.creator.places.pull(place);
-         place.creator.save({session:sess});
+        await place.creator.save({session:sess});
         await sess.commitTransaction();
     }catch(err){
         return next(new Httperror('Problemn not deleted',404));

@@ -5,4 +5,4 @@ async function getcoordinates(adress) {
         lng:45.4344
     };
 }
-module.exports = getcoordinates;
+module.exports = getcoordinates;s

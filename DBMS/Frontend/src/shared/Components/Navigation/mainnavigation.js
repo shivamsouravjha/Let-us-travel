@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import mainheader from './mainheader';
 import './mainnavigation.css';
 const mainnavigation =() => {
@@ -7,7 +8,14 @@ const mainnavigation =() => {
             <span />
             <span />
         </button>
-        <h1 className="main-navigation__title"></h1>
+        <h1 className="main-navigation__title">
+            <Link to='/'>
+                Your Places
+            </Link>
+        </h1>
+        <nav>
+            ...
+        </nav>
     </mainheader>
 };
 export default mainnavigation;

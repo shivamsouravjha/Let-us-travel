@@ -1,6 +1,6 @@
 import React from 'react';
 import './mainheader.css';
-const Newplace =() => {
-    return <h2>New Places works</h2>;
+const mainheader =() => {
+    return <header className="main-header">{props.children}</header>;
 };
-export default Newplace;
+export default mainheader;

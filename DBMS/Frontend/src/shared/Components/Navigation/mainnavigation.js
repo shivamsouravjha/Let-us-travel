@@ -1,27 +1,35 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import mainheader from './mainheader';
-import sidedrawer from './sidedrawer';
+import MainHeader from './mainheader';
 import NavLinks from './navlink';
+import SideDrawer from './sidedrawer';
+
 import './mainnavigation.css';
 
-const mainnavigation =() => {
+const mainnavigation = props => {
     return (
-    <mainheader>
-        <button className="main-navigation__menu-btn">
-            <span />
-            <span />
-            <span />
-        </button>
-        <h1 className = "main-navigation__title">
-            <Link to="/">
-                Your Places
-            </Link>
-        </h1>
-        <nav className="main-navigation__header-nav">
+        <React.Fragment>
+    <SideDrawer>
+        <nav className="main-navigation__drawer-nav">
             <NavLinks />
         </nav>
-    </mainheader>
+    </SideDrawer>
+    <MainHeader>
+    <button className="main-navigation__menu-btn">
+        <span />
+        <span />
+        <span />
+    </button>
+    <h1 className = "main-navigation__title">
+    <Link to="/">
+        Your Places
+    </Link>
+    </h1>
+    <nav className="main-navigation__header-nav">
+        <NavLinks />
+    </nav>
+</MainHeader>
+</React.Fragment>
     );
 };
 export default mainnavigation;

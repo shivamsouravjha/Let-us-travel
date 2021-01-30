@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './navlink.css';
 
-const navlink = porps => {
+const Navlink = porps => {
     return <ul className="nav-links">
         <li>
             <NavLink to="/" exact>
@@ -26,4 +26,4 @@ const navlink = porps => {
         </li>
     </ul>
 };
-export default navlink;
+export default Navlink;

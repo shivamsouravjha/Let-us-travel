@@ -6,19 +6,24 @@ import SideDrawer from './sidedrawer';
 
 import './mainnavigation.css';
 
-const mainnavigation = props => {
-    const {drawerIsOpen,setDrawerIsOpen} = useState(false);
+const Mainnavigation = props => {
+    const [drawerIsOpen,setDrawerIsOpen] = useState(false);
+    const openDrawer =()=>{
+        setDrawerIsOpen(true);
+    };
+    const closeDrawer =()=>{
+        setDrawerIsOpen(false);
+    };
     return (
         <React.Fragment>
-        {drawerIsOpen ?(
+        {drawerIsOpen && (
             <SideDrawer>
             <nav className="main-navigation__drawer-nav">
                 <NavLinks />
             </nav>
-            </SideDrawer>):null
-            }
+            </SideDrawer>)            }
     <MainHeader>
-    <button className="main-navigation__menu-btn">
+    <button className="main-navigation__menu-btn" onClick={openDrawer}>
         <span />
         <span />
         <span />
@@ -35,4 +40,4 @@ const mainnavigation = props => {
 </React.Fragment>
     );
 };
-export default mainnavigation;
+export default Mainnavigation;

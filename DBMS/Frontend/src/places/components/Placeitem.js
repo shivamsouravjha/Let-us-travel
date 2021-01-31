@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from '../../shared/Components/UIElements/Card';
+import Button from '../../shared/Components/Button/Button';
  import './Placeitem.css';
 const Placeitem = props =>{
     return <li className="place-item">
@@ -13,11 +14,11 @@ const Placeitem = props =>{
             <p>{props.description}</p>
         </div>
         <div className="place-item__actions">
-            <button>
+            <Button inverse>
                 View on the Map
-            </button>
-            <button>Edit</button>
-            <button>Delete</button>
+            </Button>
+            <Button tp={`/places/${props.id}`}>Edit</Button>
+            <Button danger>Delete</Button>
         </div>
         </Card>
     </li>;

@@ -1,5 +1,5 @@
   const express =require('express');
-  const bodyParser = require('body-parser');  
+  const bodyParser = require('body-parser');
   const Httperrors = require('./models/error');
   const userroutes =require('./routes/users-routes');
   const placeroutes =require('./routes/place-routes');
@@ -13,6 +13,7 @@
     const error = new Httperrors('Route not found',404);
     throw error;
   });
+
   app.use((error,req,res,next)=>{
     if(res.headerSent){
       return  next(error);

@@ -1,12 +1,12 @@
 import React from 'react';
 import Card from '../../shared/Components/UIElements/Card';
-import Placeitem from './Placeitem';
+import Placeitem from './Placeitem.js';
 import './Placelist.css';
 const Placelist =props=>{
     if(props.items.length ===0){
         return( <div className="place-list center">
             <card>
-                <h2> 
+                <h2>
                     no such places....
                     <button>
                         Share Place
@@ -16,7 +16,7 @@ const Placelist =props=>{
         </div>);
     }
     return <ul className="place-list">
-        {props.items.map(place=> <Placeitem 
+        {props.items.map(place=> <Placeitem
                     key={place.id}
                     id={place.id}
                     image={place.imageUrl}

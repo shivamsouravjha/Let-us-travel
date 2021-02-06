@@ -23,9 +23,13 @@ const UserPlaces = () => {
     };
     fetchPlaces();
   }, [sendRequest, userId]);
-const placeDeleteHandler = deletedPlaceId =>{
-  setLoadedPlaces(prevPlaces=>prevPlaces.filter(place => place.id !== deletedPlaceId));
-};
+
+  const placeDeletedHandler = deletedPlaceId => {
+    setLoadedPlaces(prevPlaces =>
+      prevPlaces.filter(place => place.id !== deletedPlaceId)
+    );
+  };
+
   return (
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
@@ -34,7 +38,9 @@ const placeDeleteHandler = deletedPlaceId =>{
           <LoadingSpinner />
         </div>
       )}
-      {!isLoading && loadedPlaces && <PlaceList items={loadedPlaces} onDeletePlace={placeDeleteHandler} />}
+      {!isLoading && loadedPlaces && (
+        <PlaceList items={loadedPlaces} onDeletePlace={placeDeletedHandler} />
+      )}
     </React.Fragment>
   );
 };

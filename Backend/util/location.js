@@ -1,8 +1,10 @@
-async function getcoordinates(adress) {
-    
-    return {
-        lat:49438.43,
-        lng:45.4344
-    };
+
+async function getCoordsForAddress(address) {
+ return {
+     lat: 40.7484474,
+     lng: -73.9871516
+   };
+ 
 }
-module.exports = getcoordinates;
+
+module.exports = getCoordsForAddress;

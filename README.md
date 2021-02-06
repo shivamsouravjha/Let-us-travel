@@ -1,9 +1,15 @@
-# Let-us-travel
+## Let-us-travel
 A MERN app to let users share their experience of places along with Details.
 It is user friendly and can be useful to many others.
 
-# Steps to setup:
+## Steps to setup:
 1) Fork the repository and setup in your local environment.
 2) Download any code editor and open the project using it.
+3) Then in the terminal, simply use the following codes :
+   * cd DBMS
+   * cd Frontend
+   * npm install 
+   * npm start
+   
+This should launch the website.
 
-It should look something like this-

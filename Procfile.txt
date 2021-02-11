@@ -1,2 +1,0 @@
-
-worker: node Backend/app.js

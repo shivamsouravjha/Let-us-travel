@@ -1,0 +1,2 @@
+web: node Frontend/src/App.js
+worker: node Backend/app.js
